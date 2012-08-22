@@ -1,4 +1,4 @@
-package de.danielgerber.string;
+package com.github.gerbsen.string;
 
 import junit.framework.JUnit4TestAdapter;
 

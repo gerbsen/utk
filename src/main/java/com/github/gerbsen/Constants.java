@@ -1,5 +1,4 @@
-package de.danielgerber;
-
+package com.github.gerbsen;
 
 public class Constants {
 

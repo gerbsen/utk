@@ -1,4 +1,4 @@
-package de.danielgerber.www.pagerank;
+package com.github.gerbsen.www.pagerank;
 
 import java.net.MalformedURLException;
 import java.net.URLConnection;

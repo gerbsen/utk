@@ -1,4 +1,4 @@
-package de.danielgerber.file;
+package com.github.gerbsen.file;
 
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -12,7 +12,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.danielgerber.Constants;
+import com.github.gerbsen.Constants;
 
 public class BufferedFileWriter extends Writer {
 

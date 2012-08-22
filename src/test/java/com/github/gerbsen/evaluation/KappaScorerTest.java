@@ -1,4 +1,4 @@
-package de.danielgerber.evaluation;
+package com.github.gerbsen.evaluation;
 
 import static org.junit.Assert.assertEquals;
 

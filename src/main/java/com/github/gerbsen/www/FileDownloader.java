@@ -1,4 +1,4 @@
-package de.danielgerber.www;
+package com.github.gerbsen.www;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package de.danielgerber.file;
+package com.github.gerbsen.file;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -20,8 +20,8 @@ import java.util.List;
 
 import javax.management.RuntimeErrorException;
 
-import de.danielgerber.Constants;
-import de.danielgerber.file.BufferedFileWriter.WRITER_WRITE_MODE;
+import com.github.gerbsen.Constants;
+import com.github.gerbsen.file.BufferedFileWriter.WRITER_WRITE_MODE;
 
 public class FileUtil {
 

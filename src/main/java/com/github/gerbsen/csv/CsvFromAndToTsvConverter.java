@@ -1,4 +1,4 @@
-package de.danielgerber.csv;
+package com.github.gerbsen.csv;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

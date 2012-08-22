@@ -1,14 +1,14 @@
 /**
  * 
  */
-package de.danielgerber.evaluation;
+package com.github.gerbsen.evaluation;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.danielgerber.file.BufferedFileReader;
-import de.danielgerber.file.FileUtil;
+import com.github.gerbsen.file.BufferedFileReader;
+import com.github.gerbsen.file.FileUtil;
 
 
 /**

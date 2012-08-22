@@ -1,4 +1,4 @@
-package de.danielgerber.rdf;
+package com.github.gerbsen.rdf;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -19,8 +19,8 @@ import org.semanticweb.yars.nx.parser.NxParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.danielgerber.file.BufferedFileReader;
-import de.danielgerber.string.StringUtil;
+import com.github.gerbsen.file.BufferedFileReader;
+import com.github.gerbsen.string.StringUtil;
 
 
 public class NtripleUtil {

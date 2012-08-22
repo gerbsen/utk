@@ -1,4 +1,4 @@
-package de.danielgerber.format;
+package com.github.gerbsen.format;
 
 import java.text.DecimalFormat;
 

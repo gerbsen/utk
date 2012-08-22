@@ -1,4 +1,4 @@
-package de.danielgerber.file;
+package com.github.gerbsen.file;
 
 import java.io.BufferedReader;
 import java.io.File;

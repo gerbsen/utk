@@ -1,4 +1,4 @@
-package de.danielgerber.string;
+package com.github.gerbsen.string;
 
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
@@ -69,6 +69,12 @@ public class StringUtil {
 		return longestMatch;
 	}
 	
+	/**
+	 * 
+	 * @param string
+	 * @param charactersToRemove
+	 * @return
+	 */
 	public static String removeCharactersFromString(String string, String charactersToRemove) {
 		
 		for (Character character : Lists.charactersOf(charactersToRemove) ) {
@@ -78,10 +84,14 @@ public class StringUtil {
 		return string;
 	}
 	
-	private static String removeCharacterFromString(String string, Character character) {
+	/**
+	 * 
+	 * @param string
+	 * @param character
+	 * @return
+	 */
+	public static String removeCharacterFromString(String string, Character character) {
 
 		return string.replace(character.toString(), "");
 	}
-
-	public static void main(String[] args) {}
 }

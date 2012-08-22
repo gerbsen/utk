@@ -1,4 +1,4 @@
-package de.danielgerber.math;
+package com.github.gerbsen.math;
 
 import java.util.Collection;
 
