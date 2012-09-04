@@ -100,6 +100,8 @@ public class FileUtil {
 			
 		    if ( !line.startsWith(commentSymbol) ) results.add(line);
 		}
+		br.close();
+		
 		return results;
 	}
 	
