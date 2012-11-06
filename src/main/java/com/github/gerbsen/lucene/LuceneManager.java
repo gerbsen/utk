@@ -6,6 +6,7 @@ package com.github.gerbsen.lucene;
 import java.io.File;
 import java.io.IOException;
 
+import org.apache.log4j.Logger;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.CorruptIndexException;
@@ -216,6 +217,7 @@ public class LuceneManager {
     }
 
     /**
+     * This method closes the index searcher as well as the index reader!
      * 
      * @param searcher
      */
@@ -252,7 +254,7 @@ public class LuceneManager {
      * 
      * @param queryParser
      * @param queryString
-     * @return
+     * @return the parsed query or NULL if a parse exception occured
      */
     public static Query parse(QueryParser queryParser, String queryString) {
 
@@ -262,8 +264,10 @@ public class LuceneManager {
         }
         catch (ParseException e) {
             
-            throw new RuntimeException("Could not query: \""+ queryString +"\"!", e);
+            Logger.getLogger(LuceneManager.class).warn("Could not query: \""+ queryString +"\"!", e);
         }
+        
+        return null;
     }
 
     /**

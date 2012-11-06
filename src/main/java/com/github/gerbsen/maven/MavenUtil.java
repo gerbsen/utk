@@ -11,6 +11,11 @@ import java.io.File;
  */
 public class MavenUtil {
 
+    /**
+     * 
+     * @param path
+     * @return
+     */
     public static File loadFile(String path) {
         
         return new File(MavenUtil.class.getResource(path).getFile());
