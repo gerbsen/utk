@@ -60,4 +60,10 @@ public class JenaUtil {
             throw new RuntimeException("Could not write model to file: " + pathToFile, e);
         }
     }
+
+    public static void writeModelToRemoteStore() {
+
+        // TODO Auto-generated method stub
+        
+    }
 }

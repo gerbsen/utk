@@ -87,7 +87,7 @@ public class LuceneManager {
         try {
             
             IndexReader reader = openIndexReader(index);
-            doc = getDocument(reader, number);
+            doc = getDocumentByNumber(reader, number);
             reader.close();
         }
         catch (CorruptIndexException e) {
@@ -104,25 +104,23 @@ public class LuceneManager {
     /**
      * 
      * @param reader
-     * @param number
+     * @param doc
      * @return
      */
-    public static Document getDocumentByNumber(IndexReader reader, int number) {
+    public static Document getDocumentByNumber(IndexReader reader, int docNumber) {
 
         try {
             
-            return reader.document(number);
+            return reader.document(docNumber);
         }
         catch (CorruptIndexException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+
+            throw new RuntimeException("Could not get document: \"" + docNumber +  "\"", e);
         }
         catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            
+            throw new RuntimeException("Could not get document: \"" + docNumber +  "\"", e);
         }
-        
-        return null;
     }
     
     /**
@@ -191,28 +189,6 @@ public class LuceneManager {
         catch (IOException e) {
             
             throw new RuntimeException("Could not query: \"" + query +  "\"", e);
-        }
-    }
-
-    /**
-     * 
-     * @param reader
-     * @param doc
-     * @return
-     */
-    public static Document getDocument(IndexReader reader, int docId) {
-
-        try {
-            
-            return reader.document(docId);
-        }
-        catch (CorruptIndexException e) {
-
-            throw new RuntimeException("Could not get document: \"" + docId +  "\"", e);
-        }
-        catch (IOException e) {
-            
-            throw new RuntimeException("Could not get document: \"" + docId +  "\"", e);
         }
     }
 

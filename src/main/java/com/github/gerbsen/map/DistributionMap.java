@@ -8,21 +8,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.google.common.collect.Ordering;
+
 
 /**
  * @author Daniel Gerber <dgerber@informatik.uni-leipzig.de>
  *
  */
-public class DistributionMap<T> {
+public class DistributionMap<T extends Comparable<T>> {
 
-    private Map<T,Integer> distribution;
+    private ValueComparableMap<T,Integer> distribution;
     
     /**
      * 
      */
     public DistributionMap() {
         
-        this.distribution = new HashMap<T,Integer>();
+        this.distribution = new ValueComparableMap<T, Integer>(Ordering.natural());
     }
     
     /**
@@ -66,5 +68,19 @@ public class DistributionMap<T> {
     public int size() {
 
         return this.distribution.size();
+    }
+    
+    public static void main(String[] args){
+        
+        ValueComparableMap<String, Integer> distribution = new ValueComparableMap<String, Integer>(Ordering.natural());
+        distribution.put("NNP", 1);
+        
+        
+//        DistributionMap<String> map = new DistributionMap<String>();
+//        
+//        map.addElement("b");
+//        map.addElement("c");
+        
+        System.out.println(distribution);
     }
 }
