@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.gerbsen.Constants;
+import com.github.gerbsen.encoding.Encoder.Encoding;
 
 public class BufferedFileWriter extends Writer {
 
@@ -31,6 +32,7 @@ public class BufferedFileWriter extends Writer {
 	 * @param pathToFile - the filename to write to
 	 * @param encoding - encoding of the file
 	 * @param mode - append or override
+	 * @deprecated - please use the constructor <code>BufferedFileWriter(String pathToFile, Encoding encoding, WRITER_WRITE_MODE mode)</code> instead
 	 */
 	public BufferedFileWriter(String pathToFile, String encoding, WRITER_WRITE_MODE mode) {
 
@@ -58,6 +60,42 @@ public class BufferedFileWriter extends Writer {
 			throw new RuntimeException("Could not open writer for filename: \"" + pathToFile + "\"", e);
 		}
 	}
+	
+	/**
+     * Creates a new writer with the given encoding or UTF-8 if no
+     * encoding was provided. Opens the writer in append or override
+     * mode according to the given setting.
+     * 
+     * @param pathToFile - the filename to write to
+     * @param encoding - encoding of the file
+     * @param mode - append or override
+     */
+	public BufferedFileWriter(String pathToFile, Encoding encoding, WRITER_WRITE_MODE mode) {
+
+        try {
+            
+            // set the mode if we want to append to the current file or override it
+            Boolean append = null;
+            if ( mode.equals(WRITER_WRITE_MODE.APPEND) ) append = true;
+            if ( mode.equals(WRITER_WRITE_MODE.OVERRIDE) ) append = false;
+            // chose UTF-8 if no encoding was provided
+            encoding = (encoding == null ) ? Encoding.UTF_8 : encoding;
+            
+            this.writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(pathToFile, append), encoding.toString()));
+        }
+        catch (UnsupportedEncodingException e) {
+            
+            e.printStackTrace();
+            this.logger.error("Could not open writer for encoding: \"" + encoding + "\"", e);
+            throw new RuntimeException("Could not open writer for encoding: \"" + encoding + "\"", e);
+        }
+        catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+            this.logger.error("Could not open writer for filename: \"" + pathToFile + "\"", e);
+            throw new RuntimeException("Could not open writer for filename: \"" + pathToFile + "\"", e);
+        }
+    }
 
 	@Override
 	public void close() {

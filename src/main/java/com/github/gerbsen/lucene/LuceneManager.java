@@ -19,6 +19,8 @@ import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
+import org.apache.lucene.search.Sort;
+import org.apache.lucene.search.TopFieldDocs;
 import org.apache.lucene.search.TopScoreDocCollector;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
@@ -185,6 +187,26 @@ public class LuceneManager {
         try {
             
             searcher.search(query, collector);
+        }
+        catch (IOException e) {
+            
+            throw new RuntimeException("Could not query: \"" + query +  "\"", e);
+        }
+    }
+    
+    /**
+     * 
+     * @param searcher
+     * @param query
+     * @param sort
+     * @param topNDocuments
+     * @return
+     */
+    public static TopFieldDocs query(IndexSearcher searcher, Query query, Sort sort, int topNDocuments) {
+
+        try {
+            
+            return searcher.search(query, topNDocuments, sort);
         }
         catch (IOException e) {
             

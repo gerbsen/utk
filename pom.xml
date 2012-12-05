@@ -4,7 +4,7 @@
 	<groupId>com.github.gerbsen</groupId>
 	<artifactId>utk</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<name>utk - universal tool kit</name>
 	<url>http://maven.apache.org</url>
 	<properties>

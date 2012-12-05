@@ -12,6 +12,8 @@ import java.io.UnsupportedEncodingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.github.gerbsen.encoding.Encoder.Encoding;
+
 public class BufferedFileReader extends Reader {
 
 	private final Logger logger = LoggerFactory.getLogger(BufferedFileReader.class);
@@ -24,6 +26,7 @@ public class BufferedFileReader extends Reader {
 	 * 
 	 * @param fileName - filename of the file to be read
 	 * @param encoding - the encoding of the file
+	 * @deprecated  please use the constructor <code>BufferedFileReader(String fileName, Encoding encoding)</code> instead
 	 */
 	public BufferedFileReader(String fileName, String encoding) {
 		
@@ -44,6 +47,33 @@ public class BufferedFileReader extends Reader {
 			throw new RuntimeException("Could not open reader for filename: \"" + fileName + "\"", e);
 		}
 	}
+	
+	/**
+     * Creates a reader with the given encoding for the given
+     * filename.
+     * 
+     * @param fileName - filename of the file to be read
+     * @param encoding - the encoding of the file
+     */
+	public BufferedFileReader(String fileName, Encoding encoding) {
+        
+        try {
+            
+            this.reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File(fileName)), encoding.toString()));
+        }
+        catch (UnsupportedEncodingException e) {
+            
+            e.printStackTrace();
+            logger.error("Could not open reader with encoding: \"" + encoding + "\"", e);
+            throw new RuntimeException("Could not open reader with encoding: \"" + encoding + "\"", e);
+        }
+        catch (FileNotFoundException e) {
+            
+            e.printStackTrace();
+            logger.error("Could not open reader for filename: \"" + fileName + "\"", e);
+            throw new RuntimeException("Could not open reader for filename: \"" + fileName + "\"", e);
+        }
+    }
 
 	/**
 	 * Creates a reader with java default encoding for the given
