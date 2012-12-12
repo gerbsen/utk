@@ -30,11 +30,15 @@ public class SparqlUtil {
     
     public static void main(String[] args) {
 
-        test("http://rdflivenews.org", "http://[2001:638:902:2010:0:168:35:138]/sparql");
+//        http://[2001:638:902:2010:0:168:35:138]/sparql
         
-        System.out.println("exists(http://rdflivenews.org)" + isGraphExisting("http://rdflivenews.org", "http://[2001:638:902:2010:0:168:35:138]/sparql"));
-        System.out.println("exists(http://rdflivenews.org/test)" + isGraphExisting("http://rdflivenews.org/test", "http://[2001:638:902:2010:0:168:35:138]/sparql"));
-        createGraph("http://rdflivenews.org/test", "http://[2001:638:902:2010:0:168:35:138]/sparql");
+        String server = "http://localhost:1111/sparql";
+        
+        test("http://rdflivenews.org", "http://localhost:1111/sparql");
+        
+//        System.out.println("exists(http://rdflivenews.org)" + isGraphExisting("http://rdflivenews.org", server));
+//        System.out.println("exists(http://rdflivenews.org/test)" + isGraphExisting("http://rdflivenews.org/test", server));
+//        createGraph("http://rdflivenews.org/test", server);
     }
     
     /**
@@ -81,7 +85,7 @@ public class SparqlUtil {
         
 //        String add = "INSERT DATA { GRAPH <"+graph+"> { <http://exmaple.org/test1> <http://example.org/test2> <http://example.org/test3> . } }";
 //        System.out.println(add);
-        String add = "insert into graph <http://rdflivenews.org>  {<http://dbpedia.org/resource/z> a <http://dbpedia.org/ontology/B>}";
+        String add = "insert in graph <http://rdflivenews.org>  {<http://dbpedia.org/resource/z> a <http://dbpedia.org/ontology/B>}";
         
         UpdateExecutionFactory.createRemote(
                 UpdateFactory.create(add, graph),
