@@ -27,14 +27,14 @@ public class PageRank {
 
         try {
             
-//            URLConnection con = new URL(query).openConnection();
-//            InputStream is = con.getInputStream();
-//            byte [] buff = new byte[1024];
-//            int read = is.read(buff);
-//            while (read > 0) {
-//                googlePrResult = new String(buff, 0, read);
-//                read = is.read(buff);   
-//            }
+            URLConnection con = new URL(query).openConnection();
+            InputStream is = con.getInputStream();
+            byte [] buff = new byte[1024];
+            int read = is.read(buff);
+            while (read > 0) {
+                googlePrResult = new String(buff, 0, read);
+                read = is.read(buff);   
+            }
             if ( !googlePrResult.trim().isEmpty() )
                 result = new Long(googlePrResult.split(":")[2].trim()).intValue();
             else 

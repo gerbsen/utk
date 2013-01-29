@@ -3,9 +3,10 @@ package com.github.gerbsen.similarity.wordnet;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.lucene.analysis.WhitespaceAnalyzer;
-import org.apache.lucene.queryParser.ParseException;
-import org.apache.lucene.queryParser.QueryParser;
+import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
+import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.queryparser.classic.ParseException;
+import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.TopDocs;
@@ -99,7 +100,7 @@ public class IndexBroker {
 		try {
 
 			INDEX_DIR = FSDirectory.open(MavenUtil.loadFile("/wordnet"));
-			searcher = new IndexSearcher(INDEX_DIR);
+			searcher = new IndexSearcher(IndexReader.open(INDEX_DIR));
 			parser = new QueryParser(Version.LUCENE_34, WORDS, new WhitespaceAnalyzer(Version.LUCENE_34));
 			parser.setDefaultOperator(QueryParser.AND_OPERATOR);
 		}
@@ -142,10 +143,6 @@ public class IndexBroker {
 
 //			this.logger.debug(npe.getMessage());
 		}
-		catch (ParseException ex) {
-
-//			this.logger.debug(ex.getMessage());
-		}
 		catch (IOException ex) {
 
 //			this.logger.debug(ex.getMessage());
@@ -158,6 +155,9 @@ public class IndexBroker {
 
 //			System.out.println(query);
 //			this.logger.debug(sioobe.getMessage());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return null;
 	}

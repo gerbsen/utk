@@ -6,17 +6,15 @@ package com.github.gerbsen.lucene;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.log4j.Logger;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.CorruptIndexException;
+import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.index.IndexWriterConfig.OpenMode;
-import org.apache.lucene.queryParser.ParseException;
-import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.Sort;
@@ -39,6 +37,7 @@ public class LuceneManager {
      * RuntimeException if something fails
      * 
      * @param absolutePathToLuceneIndex
+     * @param lucene40 
      * @return a lucene index directory
      */
     public static Directory openLuceneIndex(String absolutePathToLuceneIndex) {
@@ -62,7 +61,10 @@ public class LuceneManager {
 
         try {
             
-            return IndexReader.open(index);
+//        	System.out.println(34566);
+        	IndexReader r = DirectoryReader.open(index);
+//        	System.out.println(34567);
+            return r;
         }
         catch (CorruptIndexException e) {
             
@@ -224,7 +226,7 @@ public class LuceneManager {
         try {
             
             searcher.getIndexReader().close();
-            searcher.close();
+//            ((Closeable) searcher).close();
         }
         catch (IOException e) {
 
@@ -249,26 +251,6 @@ public class LuceneManager {
     }
 
     /**
-     * 
-     * @param queryParser
-     * @param queryString
-     * @return the parsed query or NULL if a parse exception occured
-     */
-    public static Query parse(QueryParser queryParser, String queryString) {
-
-        try {
-            
-            return queryParser.parse(queryString);
-        }
-        catch (ParseException e) {
-            
-            Logger.getLogger(LuceneManager.class).warn("Could not query: \""+ queryString +"\"!", e);
-        }
-        
-        return null;
-    }
-
-    /**
      * Queries a given index with the given query. Every found document is stored in the
      * TopScoreDocCollector. 
      * 
@@ -288,14 +270,14 @@ public class LuceneManager {
      * 
      * @param indexDirectory
      */
-    public static Directory createIndexIfNotExists(String indexDirectory) {
+    public static Directory createIndexIfNotExists(String indexDirectory, Version version) {
 
         Directory index = null;
         
         if ( !isIndexExisting(indexDirectory) ) {
             
             // create the index writer configuration and create a new index writer
-            IndexWriterConfig indexWriterConfig = new IndexWriterConfig(Version.LUCENE_36, new StandardAnalyzer(Version.LUCENE_36));
+            IndexWriterConfig indexWriterConfig = new IndexWriterConfig(version, new StandardAnalyzer(version));
             indexWriterConfig.setRAMBufferSizeMB(1024);
             indexWriterConfig.setOpenMode(OpenMode.CREATE);
             IndexWriter writer = openIndexWriter(indexDirectory, indexWriterConfig);
@@ -357,7 +339,7 @@ public class LuceneManager {
         
         try {
             
-            return IndexReader.indexExists(FSDirectory.open(new File(indexDirectory)));
+            return DirectoryReader.indexExists(FSDirectory.open(new File(indexDirectory)));
         }
         catch (IOException e) {
             
